@@ -1,6 +1,9 @@
 'use strict';
 
+var Event$ReactNative = require("../apis/Event.bs.js");
 var NativeElement$ReactNative = require("../elements/NativeElement.bs.js");
 
+var CheckBoxEvent = Event$ReactNative.SyntheticEvent({ });
 
-/* NativeElement-ReactNative Not a pure module */
+exports.CheckBoxEvent = CheckBoxEvent;
+/* CheckBoxEvent Not a pure module */

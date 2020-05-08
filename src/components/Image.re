@@ -43,25 +43,37 @@ module DefaultSource = {
   external fromRequired: Packager.required => t = "%identity";
 };
 
-type imageLoadEvent = Event.syntheticEvent(imageLoadPayload)
-and imageLoadPayload = {
-  uri: Js.Nullable.t(string),
-  source,
-}
-and source = {
-  width: float,
-  height: float,
-  url: string,
-};
+module ImageLoadEvent =
+  Event.SyntheticEvent({
+    type payload = {
+      uri: Js.Nullable.t(string),
+      source,
+    }
+    and source = {
+      width: float,
+      height: float,
+      url: string,
+    };
+  });
+[@deprecated]
+type imageLoadEvent = ImageLoadEvent.t;
 
-type errorEvent = Event.syntheticEvent(errorPayload)
-and errorPayload = {error: string};
+module ErrorEvent =
+  Event.SyntheticEvent({
+    type payload = {error: string};
+  });
+[@deprecated]
+type errorEvent = ErrorEvent.t;
 
-type progressEvent = Event.syntheticEvent(progressPayload)
-and progressPayload = {
-  loaded: float,
-  total: float,
-};
+module ProgressEvent =
+  Event.SyntheticEvent({
+    type payload = {
+      loaded: float,
+      total: float,
+    };
+  });
+[@deprecated]
+type progressEvent = ProgressEvent.t;
 
 [@react.component] [@bs.module "react-native"]
 external make:
@@ -75,13 +87,13 @@ external make:
     ~defaultSource: DefaultSource.t=?,
     ~fadeDuration: float=?,
     ~loadingIndicatorSource: array(Source.t)=?,
-    ~onError: errorEvent => unit=?,
+    ~onError: ErrorEvent.t => unit=?,
     ~onLayout: Event.layoutEvent => unit=?,
-    ~onLoad: imageLoadEvent => unit=?,
+    ~onLoad: ImageLoadEvent.t => unit=?,
     ~onLoadEnd: unit => unit=?,
     ~onLoadStart: unit => unit=?,
     ~onPartialLoad: unit => unit=?,
-    ~onProgress: progressEvent => unit=?,
+    ~onProgress: ProgressEvent.t => unit=?,
     ~progressiveRenderingEnabled: bool=?,
     ~resizeMethod: [@bs.string] [ | `auto | `resize | `scale]=?,
     ~resizeMode: [@bs.string] [

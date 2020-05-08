@@ -3,8 +3,13 @@ include NativeElement;
 module Orientation = Modal_Orientation;
 module OrientationChange = Modal_OrientationChange;
 
-type orientationChange = Event.syntheticEvent(orientationChangePayload)
-and orientationChangePayload = {orientation: OrientationChange.t};
+module OrientationChangeEvent =
+  Event.SyntheticEvent({
+    type payload = {orientation: OrientationChange.t};
+  });
+
+[@deprecated]
+type orientationChange = OrientationChangeEvent.t;
 
 [@react.component] [@bs.module "react-native"]
 external make:
@@ -14,7 +19,7 @@ external make:
     ~animationType: [@bs.string] [ | `none | `slide | `fade]=?,
     ~hardwareAccelerated: bool=?,
     ~onDismiss: unit => unit=?,
-    ~onOrientationChange: orientationChange => unit=?,
+    ~onOrientationChange: OrientationChangeEvent.t => unit=?,
     ~onRequestClose: unit => unit=?,
     ~onShow: unit => unit=?,
     ~presentationStyle: [@bs.string] [

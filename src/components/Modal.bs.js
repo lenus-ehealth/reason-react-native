@@ -1,11 +1,15 @@
 'use strict';
 
+var Event$ReactNative = require("../apis/Event.bs.js");
 var NativeElement$ReactNative = require("../elements/NativeElement.bs.js");
 
-var Orientation = /* alias */0;
+var OrientationChangeEvent = Event$ReactNative.SyntheticEvent({ });
 
-var OrientationChange = /* alias */0;
+var Orientation;
+
+var OrientationChange;
 
 exports.Orientation = Orientation;
 exports.OrientationChange = OrientationChange;
-/* NativeElement-ReactNative Not a pure module */
+exports.OrientationChangeEvent = OrientationChangeEvent;
+/* OrientationChangeEvent Not a pure module */
