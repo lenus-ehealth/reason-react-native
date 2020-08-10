@@ -8,6 +8,7 @@ external make:
     ~keyboardVerticalOffset: float=?,
     ~behavior: [@bs.string] [ | `height | `position | `padding]=?,
     ~contentContainerStyle: Style.t=?,
+    ~enabled: bool=?,
     // View props 0.62.0
     ~accessibilityComponentType: [@bs.string] [
                                    | `none
